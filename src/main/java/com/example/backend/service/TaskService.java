@@ -5,13 +5,17 @@ import com.example.backend.model.TaskStatus;
 import com.example.backend.repo.TaskRepo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class TaskService {
     private TaskRepo savedTasks = new TaskRepo();
 
