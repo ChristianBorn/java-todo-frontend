@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,7 +31,7 @@ class TaskServiceTest {
         Task newTask = new Task(UUID.randomUUID().toString(), "Test", TaskStatus.OPEN);
 
         //WHEN
-        when(taskRepo.getAllTasksfromRepo()).thenReturn(List.of(newTask));
+        when(taskRepo.getAllTasksfromRepo()).thenReturn(Map.of(newTask.getId(), newTask));
         List<Task> actual = taskService.getAllTasks();
         List<Task> expected = List.of(newTask);
         //Then

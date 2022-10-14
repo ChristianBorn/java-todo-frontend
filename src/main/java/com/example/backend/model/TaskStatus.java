@@ -2,6 +2,6 @@ package com.example.backend.model;
 
 public enum TaskStatus {
     OPEN,
-    DOING,
+    IN_PROGRESS,
     DONE,
 }

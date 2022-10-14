@@ -24,5 +24,13 @@ public class homeController extends baseController {
             throw new RuntimeException(e);
         }
     }
+    @PutMapping("/{id}")
+    public Task advanceTask (@PathVariable String id) {
+        return applicationService.advanceTask(id);
+    }
+    @DeleteMapping("/{id}")
+    public Task deleteTask (@PathVariable String id) {
+        return applicationService.deleteTask(id);
+    }
 
 }

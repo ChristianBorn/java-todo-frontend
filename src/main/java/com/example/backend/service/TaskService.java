@@ -36,4 +36,20 @@ public class TaskService {
                 .filter(task -> task.getStatus().equals(status))
                 .collect(Collectors.toList());
     }
+
+
+    public Task advanceTask(String id) {
+        TaskStatus status = savedTasks.getSpecificTask(id).getStatus();
+        switch (status) {
+            case OPEN: status = TaskStatus.IN_PROGRESS; break;
+            case IN_PROGRESS: status = TaskStatus.DONE; break;
+            case DONE: break;
+        }
+        return savedTasks.updateTaskStatus(status, id);
+    }
+
+    //TODO Exception Handling in case id does not exist
+    public Task deleteTask(String id) {
+        return savedTasks.deleteTask(id);
+    }
 }
