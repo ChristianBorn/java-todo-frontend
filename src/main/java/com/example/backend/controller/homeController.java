@@ -25,12 +25,21 @@ public class homeController extends baseController {
         }
     }
     @PutMapping("/{id}")
-    public Task advanceTask (@PathVariable String id) {
-        return applicationService.advanceTask(id);
+    public Task updateTask (@PathVariable String id, @RequestBody String body) {
+        try {
+            return applicationService.updateTask(id, body);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
     @DeleteMapping("/{id}")
     public Task deleteTask (@PathVariable String id) {
         return applicationService.deleteTask(id);
+    }
+
+    @GetMapping("/{id}")
+    public Task getSpecificTask (@PathVariable String id) {
+        return applicationService.getTaskById(id);
     }
 
 }

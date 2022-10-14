@@ -24,7 +24,8 @@ public class TaskService {
         Task task = objectMapper.readValue(body, Task.class);
 
         task.setId(UUID.randomUUID().toString());
-        return savedTasks.addTasktoRepo(task.getId(), task);
+        savedTasks.addTaskToRepo(task.getId(), task);
+        return task;
     }
 
     public List<Task> getAllTasks() {
@@ -38,18 +39,25 @@ public class TaskService {
     }
 
 
-    public Task advanceTask(String id) {
-        TaskStatus status = savedTasks.getSpecificTask(id).getStatus();
-        switch (status) {
-            case OPEN: status = TaskStatus.IN_PROGRESS; break;
-            case IN_PROGRESS: status = TaskStatus.DONE; break;
-            case DONE: break;
+    public Task updateTask(String id, String body) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        Task updatedTask = objectMapper.readValue(body, Task.class);
+        Task taskToUpdate = savedTasks.getSpecificTask(id);
+
+        if(!updatedTask.equals(taskToUpdate)) {
+            return savedTasks.updateTaskAttributes(updatedTask, id);
         }
-        return savedTasks.updateTaskStatus(status, id);
+
+        return null;
+
     }
 
     //TODO Exception Handling in case id does not exist
     public Task deleteTask(String id) {
         return savedTasks.deleteTask(id);
+    }
+
+    public Task getTaskById(String id) {
+        return savedTasks.getSpecificTask(id);
     }
 }
