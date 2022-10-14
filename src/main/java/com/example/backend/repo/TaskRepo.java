@@ -5,21 +5,19 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Component
 @AllArgsConstructor
 @NoArgsConstructor
 public class TaskRepo {
-    private List<Task> tasksInRepo = new ArrayList<>();
+    private Map<String, Task> tasksInRepo = new HashMap();
 
-    public List<Task> getAllTasksfromRepo() {
+    public Map<String, Task> getAllTasksfromRepo() {
         return tasksInRepo;
     }
 
-    public boolean addTasktoRepo(Task task) {
-        return tasksInRepo.add(task);
+    public Task addTasktoRepo(String id, Task task) {
+        return tasksInRepo.put(id, task);
     }
 }

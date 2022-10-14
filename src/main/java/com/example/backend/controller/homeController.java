@@ -1,7 +1,6 @@
 package com.example.backend.controller;
 
 import com.example.backend.model.Task;
-import com.example.backend.service.TaskService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +17,7 @@ public class homeController extends baseController {
     }
 
     @PostMapping
-    public boolean addNewTask(@RequestBody String body) {
+    public Task addNewTask(@RequestBody String body) {
         try {
             return super.applicationService.addTask(body);
         } catch (JsonProcessingException e) {

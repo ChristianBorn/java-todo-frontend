@@ -19,20 +19,20 @@ import java.util.stream.Collectors;
 public class TaskService {
     private TaskRepo savedTasks = new TaskRepo();
 
-    public boolean addTask(String body) throws JsonProcessingException {
+    public Task addTask(String body) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         Task task = objectMapper.readValue(body, Task.class);
 
         task.setId(UUID.randomUUID().toString());
-        return savedTasks.addTasktoRepo(task);
+        return savedTasks.addTasktoRepo(task.getId(), task);
     }
 
     public List<Task> getAllTasks() {
-        return savedTasks.getAllTasksfromRepo();
+        return savedTasks.getAllTasksfromRepo().values().stream().toList();
     }
 
     public List<Task> getTasksByStatus(TaskStatus status) {
-        return savedTasks.getAllTasksfromRepo().stream()
+        return savedTasks.getAllTasksfromRepo().values().stream()
                 .filter(task -> task.getStatus().equals(status))
                 .collect(Collectors.toList());
     }
